@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form method="get" action="http://localhost:54678/home/OnGet">
+        <input type="text" name="arg">
+        <button>Enviar</button>
+    </form>
+</div>
+
+<div class="text-center">
+    <form method="post" action="http://localhost:54678/home/OnPost">
+        <input type="text" name="arg">
+        <button>Enviar</button>
+    </form>
+</div>
+
+<div class="text-center">
+    <form method="get" asp-action="OnGet">
+        <input type="text" name="arg">
+        <button>Enviar asp-action</button>
+    </form>
+</div>
+
+<div class="text-center">
+    <form method="post" asp-action="OnPost">
+        <input type="text" name="arg">
+        <button>Enviar asp-action post</button>
+    </form>
+</div>
+
+<div class="text-center">
+    <form id="fetchForm">
+        <input type="text" name="arg" id="fetchInput" />
+    </form>
+        <button id="fetchButtonPost">enviar fetch post</button>
+
+    <script>
+        const fetchForm = document.getElementById("fetchForm");
+
+        const fetchButtonPost = document.getElementById("fetchButtonPost")
+
+        fetchButtonPost.onClick = () => {
+            fetch("Home/OnPost", {
+                method: "post",
+                body: new FormData(fetchForm)
+            })
+            .then(res => res.text())
+            .then(res => alert(res))
+
+        }
+    </script>
+</div>
